@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/erichaase/atlassian.svg)](https://travis-ci.org/erichaase/atlassian)
+
 # Description
 * Input: a chat message (string)
 * Output: JSON describing the message's special content (string)
