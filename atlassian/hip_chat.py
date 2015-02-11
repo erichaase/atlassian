@@ -1,3 +1,4 @@
+import collections
 import json
 import re
 import urllib
@@ -36,7 +37,7 @@ def get_properties (message):
     This would yield a complex regular expression outside the scope of this exercise.
     """
 
-    properties = {} # data structure that we're going to return
+    properties = collections.defaultdict(list) # data structure that we're going to return
     pattern    = r"%s|%s|%s" % (REG_EXP["mentions"], REG_EXP["emoticons"], REG_EXP["links"])
 
     for match in re.findall(pattern, message):
@@ -72,13 +73,10 @@ def get_properties (message):
                 "title" : title
             }
         else:
-            sys.stderr.write("RegExp warning: the following wasn't matched: {0}\n".format(match))
+            sys.stderr.write("warning: the following match wasn't processed: {0}\n".format(match))
             continue
 
-        # store processed key/value variables in properties dictionary
-        if key in properties:
-            properties[key].append(value)
-        else:
-            properties[key] = [value]
+        # store processed key/value variables in properties *defaultdict*
+        properties[key].append(value)
 
     return json.dumps(properties)
