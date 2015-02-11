@@ -1,1 +1,2 @@
 pytest==2.6.4
+beautifulsoup4==4.3.2
