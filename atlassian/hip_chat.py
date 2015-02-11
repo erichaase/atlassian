@@ -19,8 +19,8 @@ def get_properties (message):
     Considerations:
         Two approaches involving a tradeoff between performance and readability:
 
-        1. Scan message using re.search() *for each* property's regular expression (more readable code)
-        2. Scan message *once* using re.findall() using a more complex regular expression (better performance)
+        1. Scan message *for each* property's regular expression (more readable code)
+        2. Scan message *once* using a more complex regular expression (better performance)
 
         I choose to implement #2 so that the solution scales better
     """
