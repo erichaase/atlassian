@@ -26,13 +26,13 @@ def get_properties (message):
 
     REG_EXP = {
         "mentions"  : r"@\w+",
-        "emoticons" : r"\(.+?\)",
+        "emoticons" : r"\(\w+?\)",
         "links"     : r"https?://[^\s]+"
     }
     """
     For simplicity, assume that 'links' use the http(s) URL scheme.
     The format of a URL can be very involved. A more correct, general approach
-    would be to include multiple schemes, follow the RFC for URL formats (RFC 3986), etc.
+    would be to include multiple schemes, follow the RFC for URL formats (RFC 3986, 1808), etc.
     This would yield a complex regular expression outside the scope of this exercise.
     """
 
