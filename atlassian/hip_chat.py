@@ -15,7 +15,7 @@ def get_properties (message):
     Returns:
         str: json data describing the properties of the message
     Raises:
-        none
+        TypeError: if message parameter is not a string
     Considerations:
         Two approaches involving a tradeoff between performance and readability:
 
@@ -25,6 +25,14 @@ def get_properties (message):
         I choose to implement #2 so that the solution scales better
     """
 
+    # validate message input data
+    if type(message) != str:
+        raise TypeError("message parameter must be a string")
+
+    # data structure that we're going to return (JSON)
+    properties = collections.defaultdict(list)
+
+    # regular expressions used to extract properties from message
     REG_EXP = {
         "mentions"  : r"@\w+",
         "emoticons" : r"\(\w+?\)",
@@ -37,12 +45,13 @@ def get_properties (message):
     This would yield a complex regular expression outside the scope of this exercise.
     """
 
-    properties = collections.defaultdict(list) # data structure that we're going to return
-    pattern    = r"%s|%s|%s" % (REG_EXP["mentions"], REG_EXP["emoticons"], REG_EXP["links"])
+    # regular expression pattern used for search
+    pattern = r"%s|%s|%s" % (REG_EXP["mentions"], REG_EXP["emoticons"], REG_EXP["links"])
 
     for match in re.findall(pattern, message):
         # setup key/value variables for properties dictionary
         key, value = None, None
+
         if re.match(REG_EXP["mentions"], match):
             key   = "mentions"
             value = match[1:] # "@eric"
